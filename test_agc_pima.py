@@ -76,7 +76,7 @@ def load_and_preprocess_data(filepath):
 
 def main():
     dsfilename = 'MHR'
-    filepath = f'D:/Workspace/data/GKNN/imbalance/{dsfilename}.csv'
+    filepath = f'{dsfilename}.csv'
 
     print("="*60)
     print(f"加载数据集: {dsfilename}")
@@ -99,10 +99,10 @@ def main():
     X = scaler.fit_transform(X)
 
     classifier = GravitationalClassifier(
-        mass_weights=[0.65, 1.35],
-        k_neighbors=15,
+        mass_weights=[0, 1],
+        k_neighbors=9,
         distance_metric='euclidean',
-        gravity_weight=0.6,
+        gravity_weight=0.2,
         label_map=label_map
     )
         
@@ -125,7 +125,6 @@ def main():
         print(f"  {metric}: {value:.4f}")
     
     # print(f"\n{dsfilename}_{cv.classifier_type}纯数字输出:")
-    # # metrics_order = ['accuracy', 'macroF1', 'gMean', 'MCC', 'macroRecall', 'macroSpecificity', 'macroPrecision']
     # metrics_order = ['macroF1', 'gMean', 'MCC', 'macroRecall', 'macroSpecificity']
     # for m in metrics_order:
     #     print(f"{cv.meanMetrics[m]:.4f}")

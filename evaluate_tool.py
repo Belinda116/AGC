@@ -412,29 +412,3 @@ class EvaluateTool:
                   f"{self.results['macroSpecificity'][i]:.4f}")
         
         print("-"*60)
-
-# 测试示例
-if __name__ == "__main__":
-    from sklearn.datasets import make_classification
-    
-    # 生成测试数据
-    X, y = make_classification(n_samples=500, n_features=20, n_classes=2, 
-                               weights=[0.7, 0.3], random_state=42)
-    
-    # 测试自定义分类器（GravitationalClassifier）
-    try:
-        from AGC import GravitationalClassifier
-        
-        print("测试 GravitationalClassifier:")
-        gc = GravitationalClassifier()
-        cv = EvaluateTool(classifier_type='Gravitational', classifier=gc, cv_folds=10, stratified=True)
-        cv.validate(X, y)
-        cv.display()
-    except ImportError:
-        print("AGC模块未找到，测试内置KNN分类器")
-        
-        # 测试内置KNN分类器
-        print("\n测试 KNN 分类器:")
-        cv = EvaluateTool(classifier_type='KNN', cv_folds=10, stratified=True)
-        cv.validate(X, y)
-        cv.display()
